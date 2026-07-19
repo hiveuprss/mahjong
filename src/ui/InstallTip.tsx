@@ -29,8 +29,8 @@ export function InstallTip() {
   return (
     <div className="install-tip" role="status">
       <p>
-        Add to your Home Screen for the full app feel: tap <strong>Share</strong>,
-        then <strong>Add to Home Screen</strong>. Works offline after the first visit.
+        Install for offline play: tap <strong>Share</strong>, then{' '}
+        <strong>Add to Home Screen</strong>.
       </p>
       <button type="button" onClick={dismiss}>
         Got it

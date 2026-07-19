@@ -46,40 +46,54 @@ export function GameChrome() {
   return (
     <>
       <header className="chrome">
-        <button type="button" onClick={goToMenu}>
-          Levels
-        </button>
-        <strong>
-          {level.number}. {level.name}
-        </strong>
-        <span className="stat">{formatTime(elapsedMs)}</span>
-        <span className="stat">{remaining} left</span>
-        <span className="spacer" />
-        <button type="button" disabled={!canUndo} onClick={undo}>
-          Undo · {undosRemaining}
-        </button>
-        <button type="button" onClick={hint}>
-          Hint
-        </button>
-        <button type="button" disabled={!canRevive} onClick={revive}>
-          Revive · {revivesRemaining}
-        </button>
-        <button
-          type="button"
-          onClick={() => {
-            if (needsNewGameConfirm()) setConfirmOpen(true)
-            else confirmNewGame()
-          }}
-        >
-          New
-        </button>
+        <div className="chrome-left">
+          <button type="button" className="chrome-nav" onClick={goToMenu}>
+            Levels
+          </button>
+          <span className="chrome-title">
+            <span className="chrome-idx">
+              {String(level.number).padStart(2, '0')}
+            </span>
+            <span className="chrome-name">{level.name}</span>
+          </span>
+        </div>
+
+        <div className="chrome-stats" aria-label="Status">
+          <span className="stat">
+            <em>time</em> {formatTime(elapsedMs)}
+          </span>
+          <span className="stat">
+            <em>left</em> {remaining}
+          </span>
+        </div>
+
+        <div className="chrome-tools">
+          <button type="button" disabled={!canUndo} onClick={undo}>
+            Undo {undosRemaining}
+          </button>
+          <button type="button" onClick={hint}>
+            Hint
+          </button>
+          <button type="button" disabled={!canRevive} onClick={revive}>
+            Revive {revivesRemaining}
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              if (needsNewGameConfirm()) setConfirmOpen(true)
+              else confirmNewGame()
+            }}
+          >
+            New
+          </button>
+        </div>
       </header>
 
       {stuckVisible && (
         <div className="banner" role="status">
           <span>
-            No free tiles left — try a hint
-            {canRevive ? ' or revive the board' : ''}.
+            No free tiles — try hint
+            {canRevive ? ' or revive' : ''}.
           </span>
           <button type="button" className="primary" onClick={hint}>
             Hint
@@ -90,7 +104,7 @@ export function GameChrome() {
             disabled={!canRevive}
             onClick={revive}
           >
-            Revive · {revivesRemaining}
+            Revive {revivesRemaining}
           </button>
         </div>
       )}
@@ -98,8 +112,8 @@ export function GameChrome() {
       {confirmOpen && (
         <div className="overlay" role="dialog">
           <div className="panel">
-            <h2>Start a new game?</h2>
-            <p>Your current board progress will be lost.</p>
+            <h2>Start over?</h2>
+            <p>Current board progress will be lost.</p>
             <div className="panel-actions">
               <button type="button" onClick={() => setConfirmOpen(false)}>
                 Keep playing

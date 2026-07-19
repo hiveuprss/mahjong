@@ -28,16 +28,11 @@ export function WinModal() {
     <div className="overlay overlay-win" role="dialog" aria-label="You won">
       <Fireworks />
       <div className="panel panel-win">
-        <h2>Beautiful clear</h2>
+        <h2>Board clear</h2>
         <p>
-          Level {level.number} · <strong>{level.name}</strong> in{' '}
-          {formatTime(elapsedMs)}.
-          {best !== undefined && (
-            <>
-              <br />
-              Best: {formatTime(best)}
-            </>
-          )}
+          {String(level.number).padStart(2, '0')} {level.name} ·{' '}
+          {formatTime(elapsedMs)}
+          {best !== undefined && <> · best {formatTime(best)}</>}
         </p>
         <div className="panel-actions">
           {nxt && (

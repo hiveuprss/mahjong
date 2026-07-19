@@ -26,21 +26,24 @@ export function LevelSelect() {
 
   return (
     <div className="menu level-menu">
-      <h1 className="brand">Mahjong Solitaire</h1>
-      <p>
-        Clear each board through the tray. Matching pairs shatter — fill four
-        unmatched slots and you lose.
-      </p>
+      <header className="menu-hero">
+        <p className="menu-kicker">Free · Offline · No ads</p>
+        <h1 className="brand">Mahjong Solitaire</h1>
+        <p className="menu-lede">
+          Free tiles into the tray. Matching pairs clear. Four unmatched ends
+          the round.
+        </p>
+      </header>
 
       <div className="theme-row" role="group" aria-label="Tile theme">
-        <span className="theme-row-label">Tiles</span>
-        <div className="theme-pills">
+        <span className="theme-row-label">Faces</span>
+        <div className="theme-tabs">
           {THEMES.map((theme) => (
             <button
               key={theme.id}
               type="button"
               className={
-                theme.id === themeId ? 'theme-pill active' : 'theme-pill'
+                theme.id === themeId ? 'theme-tab active' : 'theme-tab'
               }
               onClick={() => setTheme(theme.id)}
             >
@@ -50,7 +53,12 @@ export function LevelSelect() {
         </div>
       </div>
 
-      <div className="level-grid">
+      <div className="level-ledger" aria-label="Levels">
+        <div className="level-ledger-head">
+          <span>#</span>
+          <span>Board</span>
+          <span>Best</span>
+        </div>
         {LEVELS.map((level) => {
           const locked = level.number > highestUnlocked
           const done = completedLevels.includes(level.id)
@@ -60,7 +68,7 @@ export function LevelSelect() {
               key={level.id}
               type="button"
               className={[
-                'level-card',
+                'level-row',
                 `diff-${level.difficulty}`,
                 locked ? 'locked' : '',
                 done ? 'cleared' : '',
@@ -70,18 +78,25 @@ export function LevelSelect() {
               disabled={locked}
               onClick={() => startGame(level.id)}
             >
-              <span className="level-num">{level.number}</span>
+              <span className="level-num">
+                {String(level.number).padStart(2, '0')}
+              </span>
               <span className="level-body">
                 <strong>{level.name}</strong>
                 <span>
-                  {DIFF_LABEL[level.difficulty]} · {level.slots.length} tiles
-                  {done ? ' · Cleared' : ''}
+                  {DIFF_LABEL[level.difficulty]} · {level.slots.length}
+                  {done ? ' · cleared' : ''}
                 </span>
-                {best !== undefined && (
-                  <span className="best">Best {formatTime(best)}</span>
+              </span>
+              <span className="level-meta">
+                {locked ? (
+                  <span className="lock">Lock</span>
+                ) : best !== undefined ? (
+                  <span className="best">{formatTime(best)}</span>
+                ) : (
+                  <span className="best quiet">—</span>
                 )}
               </span>
-              {locked && <span className="lock">Locked</span>}
             </button>
           )
         })}

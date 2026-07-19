@@ -6,12 +6,9 @@ import { TileFace } from './TileFace'
 /** Visual tile size (logic uses abstract 2×2 half-tile coords). */
 const TILE_W = 48
 const TILE_H = 64
-/**
- * Half-tile steps with 2px overlap so fractional CSS scale can’t
- * open green hairlines between neighbors.
- */
-const STEP_X = (TILE_W - 2) / 2
-const STEP_Y = (TILE_H - 2) / 2
+/** Half-tile steps — abut exactly (flush), no gap and no overlap. */
+const STEP_X = TILE_W / 2
+const STEP_Y = TILE_H / 2
 /**
  * Per-layer depth: rise straight up only. A diagonal lift made whole
  * pyramids lean (and threw Turtle’s centered peak off-axis).

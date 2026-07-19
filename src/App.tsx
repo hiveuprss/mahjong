@@ -5,7 +5,6 @@ import { GameChrome } from './ui/GameChrome'
 import { InstallTip } from './ui/InstallTip'
 import { LevelSelect } from './ui/LevelSelect'
 import { LoseModal } from './ui/LoseModal'
-import { RotatePrompt } from './ui/RotatePrompt'
 import { Tray } from './ui/Tray'
 import { WinModal } from './ui/WinModal'
 
@@ -55,7 +54,6 @@ export default function App() {
       )}
       <WinModal />
       <LoseModal />
-      <RotatePrompt />
       <InstallTip />
     </div>
   )

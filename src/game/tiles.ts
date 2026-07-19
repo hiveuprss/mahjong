@@ -125,5 +125,6 @@ export function buildFullDeck(): TileFace[] {
 }
 
 export function tileAssetUrl(face: TileFace): string {
-  return `/tiles/${FACE_ASSET[face]}`
+  // Respect Vite base (e.g. /mahjong/ on GitHub Pages)
+  return `${import.meta.env.BASE_URL}tiles/${FACE_ASSET[face]}`
 }

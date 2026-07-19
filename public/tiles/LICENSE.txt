@@ -1,0 +1,5 @@
+Mahjong tile illustrations from:
+https://github.com/samoheen/mahjong-tiles
+
+License: CC0 1.0 Universal (public domain dedication)
+See upstream LICENSE.md for details.

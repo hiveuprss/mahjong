@@ -23,8 +23,7 @@ jobs:
         with:
           node-version: 22
           cache: npm
-      # npm install (not ci): lockfile from macOS/arm omits linux-x64 Rollup optional deps
-      - run: npm install
+      - run: npm ci
       - run: npx tsc -b && npx vite build --base /mahjong/
       - uses: actions/upload-pages-artifact@v3
         with:
